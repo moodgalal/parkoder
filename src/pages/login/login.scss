@@ -1,0 +1,49 @@
+page-login {
+.scroll-content{
+        background-image: url(../assets/parking.jpg);
+        background-size: cover;
+        background-repeat: no-repeat;
+    }
+    ion-content .logo{
+    display: block;
+    margin:40px auto;
+    height: 60px;
+    }
+    form, input, optgroup, select{
+        border-radius: 5px;
+        // box-shadow: 0px 1px 8px 4px rgba(0, 0, 0, 0.36); 
+    }
+    .label-md-primary, .item-input .label-md-primary,{
+        color: #fff;
+    }
+  ion-item{
+      ion-label{
+          color: #fff !important;
+      }
+  }
+    .item-md{
+        background-color: rgba(245, 61, 61, 0.36);
+    
+    }
+   .item-md:first-child{
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+   }
+    .item-md:last-child .item-inner{
+        border-bottom: none;
+        border-bottom-left-radius: 5px;
+        border-bottom-right-radius: 5px;
+    }
+    .item-label-stacked .input-wrapper, .item-label-floating .input-wrapper{
+    padding-left: 3px;
+    padding-right: 3px; 
+    border-radius: 4px;
+    // box-shadow: inset 0px 0px 8px  #eee,inset -0px -0px 8px  #eee;
+}   
+.submit-btn{
+    text-align: center;
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
+}
+ 
+}

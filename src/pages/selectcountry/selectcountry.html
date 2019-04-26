@@ -1,0 +1,19 @@
+<ion-header>
+  <ion-navbar color="primary">
+    <ion-title>Select Country</ion-title>
+  </ion-navbar>
+</ion-header>
+
+
+<ion-content>
+   <ion-searchbar (ionInput)="getItem($event)"></ion-searchbar>
+  <div *ngIf="countries">
+    <ion-list>
+        <button ion-item *ngFor="let country of countries"  (click)="saveCar(country)">
+          <ion-avatar item-start>
+            <img src="{{ country.CountryCode | countryImage }}" alt="iconName">
+          </ion-avatar> {{ country.CountryName }}
+        </button>
+    </ion-list>
+  </div>
+</ion-content>

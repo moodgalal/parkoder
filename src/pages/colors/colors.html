@@ -1,0 +1,41 @@
+<ion-header>
+  <ion-navbar hidebackbutton="true" color="primary">
+    <ion-title>Selecting Color</ion-title>
+    <ion-buttons end>
+      <button ion-button icon-only (click)="addCustomer()">
+        <ion-icon name="person"></ion-icon>
+      </button>
+      <button ion-button padding clear  (click)="goHome()">
+        Home
+      </button>
+    </ion-buttons>
+  </ion-navbar>
+</ion-header>
+
+
+<ion-content>
+
+  <ion-row>
+    <ion-col col-6 class="list">
+      <ion-list>
+        <ion-item *ngFor="let right of rightColors" (click)="goTypes(right)"
+                  [class.selected]="selected !== null && right.id === selected">
+          <span item-start style="width: 50px;height: 50px; border-radius: 50%;border: 1px solid #d9d8ee;" [ngStyle]="{'background': right.name}"></span>
+          {{ right.name}}
+        </ion-item>
+      </ion-list>
+    </ion-col>
+
+    <ion-col col-6 class="list">
+      <ion-list>
+        <ion-item *ngFor="let left of leftColors" (click)="goTypes(left)"
+                  [class.selected]="selected !== null && left.id === selected">
+          <span item-start style="width: 50px;height: 50px; border-radius: 50%;border: 1px solid #d9d8ee;" [ngStyle]="{'background': left.name}"></span>
+          {{ left.name}}
+        </ion-item>
+      </ion-list>
+    </ion-col>
+  </ion-row>
+</ion-content>
+
+<transaction *ngIf="Ticket" [carData]="Ticket"></transaction>

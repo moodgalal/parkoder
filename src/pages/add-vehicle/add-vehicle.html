@@ -1,0 +1,82 @@
+<ion-header>
+
+  <ion-navbar color="primary">
+    <ion-title>{{ editStatus? 'edit': 'add' }}-vehicle</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+
+  <span>Vehicle Details</span>
+  <hr>
+  <ion-list>
+
+    <ion-item>
+      <ion-label floating>PlateNumber.</ion-label>
+      <ion-input type="number" [(ngModel)]="vehicle.PlateNumber"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label floating>PlateNoPrefix</ion-label>
+      <ion-input type="text" [(ngModel)]="vehicle.PlateNoPrefix"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label floating>CountryCode</ion-label>
+      <ion-select [(ngModel)]="vehicle.CountryCode">
+        <ion-option *ngFor="let country of countries" [value]="country.CountryCode">{{ country.CountryName }}</ion-option>
+      </ion-select>
+    </ion-item>
+
+
+    <ion-item>
+      <ion-label floating> Vehicle Brand </ion-label>
+      <ion-select [(ngModel)]="vehicle.VehicleBrandID">
+        <ion-option *ngFor="let brand of carBrand" [value]="brand.VehicleBrandID">{{ brand.VehicleBrandName }}</ion-option>
+      </ion-select>
+    </ion-item>
+
+    <ion-item>
+      <ion-label floating> Vehicle Type </ion-label>
+      <ion-select [(ngModel)]="vehicle.VehicleTypeID">
+        <ion-option *ngFor="let type of carType" [value]="type.VehicleTypeID">{{ type.VehicleTypeName }}</ion-option>
+      </ion-select>
+    </ion-item>
+
+    <ion-item>
+      <ion-label floating>Vehicle Color</ion-label>
+      <ion-select [(ngModel)]="vehicle.VehicleColorID">
+        <ion-option *ngFor="let color of carColor" [value]="color.VehicleColorID">{{ color.VehicleColorName }}</ion-option>
+      </ion-select>
+    </ion-item>
+
+    <ion-item>
+      <ion-label floating>Vehicle Status</ion-label>
+      <ion-select [(ngModel)]="vehicle.VehicleStatusID">
+        <ion-option *ngFor="let status of carStatus" [value]="status.VehicleStatusID">{{ status.VehicleStatusName }}</ion-option>
+      </ion-select>
+    </ion-item>
+
+    <ion-item>
+      <ion-label floating>Customer Number</ion-label>
+      <ion-input type="text" [(ngModel)]="vehicle.CUSTNMBR" [disabled]="true"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label floating>Customer Name</ion-label>
+      <ion-input type="text" [(ngModel)]="vehicle.CustomerName" [disabled]="true"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label floating>Customer Phone Number</ion-label>
+      <ion-input type="number" [(ngModel)]="vehicle.CustomerPhoneNumber" [disabled]="true"></ion-input>
+    </ion-item>
+
+  </ion-list>
+
+  <button ion-button full (click)="addNewVehicle()" *ngIf="!editStatus"> add New Vehicle</button>
+  <button ion-button full (click)="editVehicle()" *ngIf="editStatus"> Edit Vehicle</button>
+
+</ion-content>

@@ -1,0 +1,165 @@
+<ion-header>
+
+  <ion-navbar color="primary">
+    <ion-title>{{ showEditButton ? 'edit': 'add' }}-customer</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+  <span>Member's Personal Details</span>
+  <hr>
+  <ion-list>
+
+    <ion-item>
+      <ion-label floating>Customer Number</ion-label>
+      <ion-input type="text" [(ngModel)]="newCustomer.CUSTNMBR"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label floating>Full Name</ion-label>
+      <ion-input type="text" [(ngModel)]="newCustomer.CustomerName"></ion-input>
+    </ion-item>
+
+
+    <ion-item>
+      <ion-label floating>Name On The Memebership Card</ion-label>
+      <ion-input type="text" [(ngModel)]="newCustomer.CustomerNameCard"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label floating>CustomerPhoneNumber</ion-label>
+      <ion-input type="text" [(ngModel)]="newCustomer.CustomerPhoneNumber"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label floating>Date of Birth</ion-label>
+      <ion-datetime displayFormat="MMM DD YYYY" [(ngModel)]="newCustomer.BirthDate"></ion-datetime>
+    </ion-item>
+
+    <ion-item>
+      <ion-label floating>CPR No</ion-label>
+      <ion-input type="text" [(ngModel)]="newCustomer.CPR"></ion-input>
+    </ion-item>
+
+
+    <ion-item>
+      <ion-label floating>Mobile No. (1)</ion-label>
+      <ion-input type="number" [(ngModel)]="newCustomer.Mobile01"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label floating>Mobile No. (2)</ion-label>
+      <ion-input type="number" [(ngModel)]="newCustomer.Mobile02"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label floating>Phone No. (1)</ion-label>
+      <ion-input type="number" [(ngModel)]="newCustomer.Phone01"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label floating>Phone No. (2)</ion-label>
+      <ion-input type="number" [(ngModel)]="newCustomer.Phone02"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label floating>Email (1)</ion-label>
+      <ion-input type="email" [(ngModel)]="newCustomer.Email01"></ion-input>
+    </ion-item>
+
+
+    <ion-item>
+      <ion-label floating>Email (2)</ion-label>
+      <ion-input type="email" [(ngModel)]="newCustomer.Email02"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label floating>Nationality</ion-label>
+      <ion-select [(ngModel)]="newCustomer.NationalityID">
+        <ion-option *ngFor="let nationality of nationalities" [value]="nationality.NationalityID">{{ nationality.NationalityName }}</ion-option>
+      </ion-select>
+    </ion-item>
+
+
+  </ion-list>
+
+  <span>Address</span>
+  <hr>
+
+  <ion-list>
+
+    <ion-item>
+      <ion-label floating>Flat/House:</ion-label>
+      <ion-input type="text" [(ngModel)]="newCustomer.FlatNum"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label floating>Building:</ion-label>
+      <ion-input type="text" [(ngModel)]="newCustomer.Building"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label floating>Road:</ion-label>
+      <ion-input type="text" [(ngModel)]="newCustomer.Road"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label floating>City</ion-label>
+      <ion-select [(ngModel)]="newCustomer.CityCode">
+        <ion-option *ngFor="let city of cities" [value]="city.CityCode">{{ city.CityName}}</ion-option>
+      </ion-select>
+    </ion-item>
+
+    <!--<ion-item>-->
+      <!--<ion-label floating>P.O.Box:</ion-label>-->
+      <!--<ion-input type="number" ></ion-input>-->
+    <!--</ion-item>-->
+
+    <ion-item>
+      <ion-label floating>WHY CHOOSE PARKPASS?</ion-label>
+      <ion-select [multiple]="true">
+        <ion-option value="savings">savings</ion-option>
+        <ion-option value="convenience">convenience</ion-option>
+        <ion-option value="prestige">prestige</ion-option>
+        <ion-option value="other">other</ion-option>
+      </ion-select>
+
+    </ion-item>
+
+    <ion-item>
+      <ion-label floating>HOW DID YOU HEAR ABOUT US?</ion-label>
+      <ion-select [multiple]="true">
+        <ion-option value="sm">social media</ion-option>
+        <ion-option value="ma">magazine</ion-option>
+        <ion-option value="ad">advertisement</ion-option>
+        <ion-option value="other">other</ion-option>
+      </ion-select>
+
+    </ion-item>
+
+
+  </ion-list>
+
+
+
+  <ion-list *ngIf="showEditButton">
+    <ion-list-header>
+      vehicles
+    </ion-list-header>
+    <ion-item *ngFor="let vehicle of vehicles">
+      <span item-start>{{ vehicle.PlateNumber }}</span>
+      <button item-end ion-button icon-only  (click)="editVehicle(vehicle)">
+        <ion-icon name="create"></ion-icon>
+      </button>
+    </ion-item>
+    <ion-item>
+      <button ion-button full (click)="addVehicle()"> Add New vehicle</button>
+    </ion-item>
+  </ion-list>
+
+  <button ion-button full (click)="addNewCustomer()" *ngIf="!showEditButton">add customer</button>
+  <button ion-button full (click)="editCustomer()" *ngIf="showEditButton">Edit customer</button>
+
+</ion-content>

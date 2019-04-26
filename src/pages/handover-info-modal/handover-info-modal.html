@@ -1,0 +1,73 @@
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>Handover Details</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+<ion-content padding>
+  <ion-list *ngIf="allInfo">
+    <ion-item>
+      <span item-start>Barcode:</span>
+      <span item-end>
+        {{allInfo.BarCode}}
+      </span>
+    </ion-item>
+    <ion-item>
+      <span item-start>Plate Number:</span>
+      <span item-end>
+        {{allInfo.PlateNumber}}
+      </span>
+    </ion-item>
+    <ion-item [hidden]="allInfo.PlateNoPrefix === null">
+      <span item-start>Plate Number Prefix:</span>
+      <span item-end>
+        {{allInfo.PlateNoPrefix}}
+      </span>
+    </ion-item>
+    <ion-item>
+      <ion-label item-start>Time In: </ion-label>
+      <span item-end>{{myCar.getHours() - 1}}:{{myCar.getMinutes()}}</span>
+    </ion-item>
+    <ion-item *ngIf="allInfo.InRequestDate != null">
+      <ion-label item-start>In request Time: </ion-label>
+      <span item-end>{{myCar.getHours() - 1}}:{{myCar.getMinutes()}}</span>
+    </ion-item>
+    <ion-item>
+      <span item-start>Entry User: </span>
+      <span item-end>
+        {{allInfo.EntryUserName}}
+      </span>
+    </ion-item>
+    <ion-item>
+      <span item-start>processor:</span>
+      <span item-end>
+        {{allInfo.BinUserName}}
+      </span>
+    </ion-item>
+    <ion-item [hidden]="allInfo.RetrieveSalePersonID == null || allInfo.RetrieveSalePersonID.trim() != userEmail.trim()">
+      <span item-start> RetrieveSalePersonID:</span>
+      <span item-end>
+        {{allInfo.RetrieveSalePersonID}}
+      </span>
+    </ion-item>
+    <div *ngIf="allInfo.RetrieveSalePersonID !== null && userEmail !== null">
+      <ion-grid >
+        <ion-row>
+          <ion-col  width-50>
+            <ion-item>
+              <button  ion-button full padding color="primary" (click)="acceptCar()">Accept</button>
+            </ion-item>
+          </ion-col>
+          <ion-col  width-50>
+            <ion-item>
+              <button  ion-button full padding color="danger" (click)="declineCar()">Decline</button>
+            </ion-item>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </div>
+  </ion-list>
+</ion-content>
+<transaction *ngIf="allInfo" [carData]="allInfo"></transaction>

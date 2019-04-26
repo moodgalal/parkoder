@@ -1,0 +1,123 @@
+<ion-header>
+  <ion-navbar color="primary">
+    <ion-title>Car Payment</ion-title>
+
+    <ion-buttons end>
+      <button ion-button icon-only (click)="addCustomer()">
+        <ion-icon name="person"></ion-icon>
+      </button>
+    </ion-buttons>
+
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+  <ion-list *ngIf="Ticket">
+    <customer [Ticket]="Ticket"></customer>
+    <ion-item >
+      Barcode Number:
+      <span item-end>
+        {{Ticket.BarCode}}
+      </span>
+    </ion-item>
+    <ion-item>
+      Plate Number:
+      <span item-end>
+        {{Ticket.PlateNumber}}
+      </span>
+    </ion-item>
+
+
+    <ion-item >
+      <span item-start>Country:</span>
+      <span item-end>
+            <ion-avatar>
+                <img src="{{ Ticket.CountryCode | countryImage }}" alt="iconName">
+            </ion-avatar>
+        {{Ticket.countryName}}
+      </span>
+    </ion-item>
+
+
+
+    <ion-item>
+      <ion-label item-start>Date In: </ion-label>
+      <span item-end>{{ Ticket.TimeIn }} </span>
+    </ion-item>
+
+    <!--<ion-item>-->
+      <!--<ion-label item-start>Date Out: </ion-label>-->
+      <!--<span item-end>{{ timeInMs | date:'H:m'}}</span>-->
+    <!--</ion-item>-->
+    <!--<ion-item>-->
+      <!--<ion-label item-start>Duration: </ion-label>-->
+      <!--<strong item-end>{{ myCar.duration| time }}</strong>-->
+    <!--</ion-item>-->
+    <ion-item>
+      <ion-label item-start>Price: </ion-label>
+      <span item-end padding style="background-color: #ddd; border-radius: 5px"><strong>{{ Ticket.DocAmount }}  {{ defaultCurrencyCode }}</strong></span>
+    </ion-item>
+    <ion-item>
+      <ion-label item-start>Advanced Amount: </ion-label>
+      <span item-end padding style="background-color: #ddd; border-radius: 5px"><strong>{{ Ticket.AdvancedPayment }} {{ defaultCurrencyCode }}</strong></span>
+    </ion-item>
+    <ion-item>
+      <ion-label item-start>Net Amount: </ion-label>
+      <span item-end padding style="background-color: #ddd; border-radius: 5px"><strong>{{ netAmount }} {{ defaultCurrencyCode }}</strong></span>
+    </ion-item>
+    <ion-item *ngIf="exchangeNetAmount">
+      <ion-label item-start>Net Amount ({{ Ticket.CurrencyCode }}): </ion-label>
+      <span item-end padding style="background-color: #ddd; border-radius: 5px"><strong>{{ exchangeNetAmount }} {{ Ticket.CurrencyCode }}</strong></span>
+    </ion-item>
+    <ion-item *ngIf="Ticket.Points > 0">
+      <ion-label item-start>Points: </ion-label>
+      <span item-end padding style="background-color: #ddd; border-radius: 5px"><strong>{{ Ticket.Points }}</strong></span>
+    </ion-item>
+    <ion-item-group [hidden]="!showCasheInput">
+      <ion-item>
+        <ion-label item-start style="color: #000 !important;">Currency</ion-label>
+        <ion-select item-end name="curCode" [(ngModel)]="Ticket.CurrencyCode" style="min-width: 100%;max-width: 100%" (ionChange)="getExchange()">
+          <ion-option *ngFor="let cur of currencies" [value]="cur.CurrencyCode" >{{ cur.CurrencyCode }}</ion-option>
+        </ion-select>
+      </ion-item>
+      <ion-item>
+        <ion-label item-start style="color: #000 !important;">Paid Amount</ion-label>
+        <ion-input item-end [(ngModel)]="Ticket.CollectedAMT" type="number" placeholder="amount to pay"></ion-input>
+      </ion-item>
+      <ion-item *ngIf="exchangeNetAmount === null && Ticket.CollectedAMT >= Ticket.DocAmount">
+        <ion-label item-start>Balance: </ion-label>
+        <span item-end>{{ netAmount - Ticket.CollectedAMT }} {{ Ticket.CurrencyCode }} </span>
+      </ion-item>
+      <ion-item *ngIf="exchangeNetAmount !== null && Ticket.CollectedAMT >= Ticket.DocAmount">
+        <ion-label item-start>Balance: </ion-label>
+        <span item-end>  {{ netAmount - Ticket.CollectedAMT }} {{ defaultCurrencyCode }} <==> {{ exchangeNetAmount - Ticket.CollectedAMT }} {{ Ticket.CurrencyCode }} </span>
+      </ion-item>
+      <ion-item *ngIf="Ticket.CollectedAMT >= Ticket.DocAmount">
+        <button ion-button full padding color="primary" (click)="CashOK()">OK</button>
+      </ion-item>
+      <ion-item>
+        <button ion-button full padding color="primary" (click)="cancelPayment()">Cancel</button>
+      </ion-item>
+    </ion-item-group>
+    <ion-grid  *ngIf="netAmount > 0">
+      <ion-row>
+        <ion-col  width-50>
+          <ion-item>
+            <button ion-button full padding color="primary" (click)="goCash()">Cash</button>
+          </ion-item>
+          <ion-item>
+            <button ion-button full padding color="primary" (click)="ShowCustomerEntry()">MemberShip showCustomer</button>
+          </ion-item>
+        </ion-col>
+        <ion-col  width-50>
+          <ion-item>
+            <button ion-button full padding color="primary" (click)="goCredit()">Credit</button>
+          </ion-item>
+          <ion-item>
+            <button ion-button full padding color="primary">Discount</button>
+          </ion-item>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </ion-list>
+</ion-content>

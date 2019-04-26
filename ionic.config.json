@@ -1,0 +1,8 @@
+{
+  "name": "ParkPass",
+  "app_id": "c4ab744a",
+  "type": "ionic-angular",
+  "integrations": {
+    "cordova": {}
+  }
+}

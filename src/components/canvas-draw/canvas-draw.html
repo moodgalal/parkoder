@@ -1,0 +1,21 @@
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>Damages Draw</ion-title>
+    <ion-buttons end>
+      <button ion-button icon-only style="margin-right: 15px;" (click)="clearCanvas()">
+        <ion-icon name="trash"></ion-icon>
+      </button>
+      <button ion-button icon-only (click)="exportElement(pdf)">
+        <ion-icon name="checkmark"></ion-icon>
+      </button>
+    </ion-buttons>
+  </ion-navbar>
+
+</ion-header>
+
+<ion-content  class="no-scroll">
+   <div #pdf>
+     <canvas id="canvasSamir"  #myCanvas (touchstart)="handleStart($event)" (touchmove)="handleMovement($event)" (touched)="handleEnd($event)"></canvas>
+   </div>
+</ion-content>

@@ -1,0 +1,78 @@
+<ion-header>
+  <ion-navbar color="primary">
+    <ion-title>Save Transaction</ion-title>
+  </ion-navbar>
+</ion-header>
+
+
+<ion-content padding>
+    <form #f="ngForm">
+      <ion-list>
+
+        <ion-item>
+          <ion-icon item-start ios="ios-barcode" md="md-barcode"></ion-icon>
+          <ion-input type="text" name="barcode" minlength="5" [(ngModel)]="Ticket.BarCode" required placeholder="Enter Barcode"></ion-input>
+        </ion-item>
+
+        <ion-item>
+          <ion-icon item-start ios="ios-car" md="md-car"></ion-icon>
+          <ion-input type="number" name="plateNum"  required [(ngModel)]="Ticket.PlateNumber" placeholder="Plate Number" (keyup)="checkPlateNum($event.target.value)"></ion-input>
+        </ion-item>
+
+        <ion-item *ngIf="Ticket.showPrefix">
+          <ion-icon item-start ios="ios-car" md="md-car"></ion-icon>
+          <ion-input type="text" name="platePrefix"  [(ngModel)]="Ticket.PlateNoPrefix" placeholder="Prefix" (keyup)="checkPrefixNum($event.target.value)"></ion-input>
+        </ion-item>
+        <ion-item no-lines>
+          <button item-start ion-button small round color="primary" (click)="showPayment()">Payment</button>
+          <button item-end ion-button small round color="primary" (click)="showUser()">Customer</button>
+        </ion-item>
+        <ion-item-group [hidden]="hideUser">
+          <ion-item>
+            <ion-icon item-start name="person"></ion-icon>
+            <ion-input type="text" name="cusName"   [(ngModel)]="Ticket.CUSTNMBR" placeholder="Customer Number"></ion-input>
+          </ion-item>
+          <ion-item>
+            <ion-icon item-start name="call"></ion-icon>
+            <ion-input type="text" name="phone"   [(ngModel)]="Ticket.CustomerName" placeholder="Enter customer Name"></ion-input>
+          </ion-item>
+          <ion-item>
+            <ion-icon item-start name="call"></ion-icon>
+            <ion-input type="text" name="phone2"   [(ngModel)]="Ticket.CustomerPhoneNumber" placeholder="Enter Phone Number"></ion-input>
+          </ion-item>
+          <ion-item>
+            <button ion-button (click)="hideUser = !hideUser">Save</button>
+          </ion-item>
+        </ion-item-group>
+        <ion-item-group [hidden]="hidePayment">
+          <ion-item>
+            <ion-label item-start style="color: #000 !important;">Currency</ion-label>
+            <ion-select item-end name="curCode" [(ngModel)]="Ticket.CurrencyCode" style="min-width: 100%;max-width: 100%">
+              <ion-option *ngFor="let cur of currencies" [value]="cur.CurrencyCode">{{ cur.CurrencyCode }}</ion-option>
+            </ion-select>
+          </ion-item>
+          <ion-item>
+            <ion-label item-start style="color: #000 !important;">Paid Amount</ion-label>
+            <ion-input item-end type="number" name="amount" [(ngModel)]="Ticket.AdvancedPayment" [required]="hidePayment == false" style="margin-left: 60px" placeholder="Required Field"></ion-input>
+          </ion-item>
+          <ion-item>
+            <button ion-button (click)="SavePayment()">Save</button>
+            <button ion-button (click)="CalcelPayment()">Cancel</button>
+          </ion-item>
+        </ion-item-group>
+         <br>
+        <ion-item>
+          <button [disabled]="disableButtons"  ion-button padding color="danger"
+                  (click)="cancel()">Cancel</button>
+          <button [disabled]="!f.valid || disableButtons" ion-button padding color="secondary"
+                  (click)="AttendCar()">Attend</button>
+        </ion-item>
+        <ion-item>
+          <button [disabled]="!f.valid || disableButtons" ion-button padding color="primary"
+                  (click)="GoQueueIn()">Queue In</button>
+          <button [disabled]="!f.valid || disableButtons" ion-button padding color="primary"
+                  (click)="DoHold()">Hold</button>
+        </ion-item>
+      </ion-list>
+    </form>
+</ion-content>

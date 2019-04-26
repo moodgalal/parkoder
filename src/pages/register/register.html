@@ -1,0 +1,25 @@
+<ion-header>
+  <ion-navbar color="primary">
+    <ion-title >Register</ion-title>
+  </ion-navbar>
+</ion-header>
+
+
+<ion-content padding>
+  <form #f="ngForm" (ngSubmit)="register()" novalidate>
+    <ion-item>
+      <ion-label stacked color="primary">Enter Your email</ion-label>
+      <ion-input type="email" [(ngModel)]="user.email" name="email" required></ion-input>
+        
+    </ion-item>
+    <ion-item>
+      <ion-label stacked color="primary">Enter Your Password</ion-label>
+      <ion-input type="password" [(ngModel)]="user.password" name="password" required></ion-input>
+
+    </ion-item>
+    <ion-item>
+      <button [disabled]="!f.valid"  padding  ion-button type="submit" color="primary">Register</button>
+    </ion-item>
+
+  </form>
+</ion-content>

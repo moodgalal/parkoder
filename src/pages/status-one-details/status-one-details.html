@@ -1,0 +1,102 @@
+<ion-header>
+  <ion-navbar color="primary">
+    <ion-title text-center>Details</ion-title>
+    <ion-buttons end>
+        <button ion-button icon-only (click)="drawDamages()">
+          <ion-icon name="car"></ion-icon>
+        </button>
+      </ion-buttons>
+  </ion-navbar>
+</ion-header>
+<ion-content padding>
+  <ion-list>
+    <ion-item>
+      Barcode:
+      <span item-end>
+        {{Ticket.BarCode}}
+      </span>
+    </ion-item>
+    <ion-item>
+      Plate Number:
+      <span item-end>
+        {{Ticket.PlateNoPrefix}} {{Ticket.PlateNumber}}
+      </span>
+    </ion-item>
+    <ion-item>
+      <span item-start>Gate:</span>
+      <span item-end>
+        {{Ticket.GateName}}
+      </span>
+    </ion-item>
+    <ion-item>
+      <span item-start>Country:</span>
+      <span item-end>
+        <ion-avatar>
+
+
+        </ion-avatar>
+        {{Ticket.countryName}}
+      </span>
+    </ion-item>
+    <ion-item>
+      <ion-label item-start>Date In: </ion-label>
+      <span item-end>{{Ticket.TimeIn | date:'shortTime'}} </span>
+    </ion-item>
+    <ion-item>
+      <ion-label item-start>Duration: </ion-label>
+      <span item-end>{{ carDuration | time}} </span>
+    </ion-item>
+    <ion-item *ngIf="Ticket.CustomerName">
+      <ion-label item-start>Customer: </ion-label>
+      <span item-end>{{ Ticket.CustomerName}} {{ Ticket.CustomerPhoneNumber}}</span>
+    </ion-item>
+    <ion-item>
+      <span item-start>Entry User: </span>
+      <span item-end>
+        {{Ticket.EntryUserName}}
+      </span>
+    </ion-item>
+    <ion-item>
+      <ion-label item-start>Price: </ion-label>
+      <span item-end padding style="background-color: #ddd; border-radius: 5px"><strong>{{ Ticket.Points }}  Points => {{ Ticket.DocAmount }} {{ Ticket.CurrencyCode }}</strong></span>
+    </ion-item>
+    <payment *ngIf="showPayment" [data]="Ticket" (closeEvent)="closePayment($event)"></payment>
+    <customer *ngIf="showCustomer" [Ticket]="Ticket" (closeEvent)="closeCustomer($event)"></customer>
+    <ion-grid>
+      <ion-row>
+        <ion-col col-4>
+          <ion-item>
+            <button ion-button full padding color="primary" (click)="showPaymentComponent()">
+              Payment
+            </button>
+          </ion-item>
+        </ion-col>
+        <ion-col col-4>
+          <ion-item>
+            <button ion-button full padding color="light" (click)="showcustomerComponent()">
+              Customer
+            </button>
+          </ion-item>
+        </ion-col>
+        <ion-col col-4>
+          <ion-item>
+            <button ion-button full padding color="light" (click)="saveHold()">
+              HOLLD
+            </button>
+          </ion-item>
+        </ion-col>
+        <ion-col col-4>
+          <ion-item>
+            <button ion-button full padding color="light" (click)="goToPin()">Attend</button>
+          </ion-item>
+        </ion-col>
+        <ion-col col-4>
+          <ion-item>
+            <button ion-button full padding color="danger" (click)="Cancel()">Cancel</button>
+          </ion-item>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </ion-list>
+</ion-content>
+<transaction *ngIf="Ticket" [carData]="Ticket"></transaction>

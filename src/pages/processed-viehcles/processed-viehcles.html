@@ -1,0 +1,32 @@
+<ion-header>
+
+  <ion-navbar color="primary">
+    <ion-title>Parked Vehicles</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content>
+  <ion-list >
+      <div *ngIf="processed">
+        <ion-item *ngFor="let v of processed">
+          <ion-avatar item-start>
+            <img src="{{ v.CountryCode | countryImage }}" alt="iconName">
+          </ion-avatar>
+          <h3 class="{{v.RecordStatusID | transColor}}">{{ v.BarCode }}</h3>
+          <h5>{{ v.VehicleBrandName }}</h5>
+          <h5>PlateNo:{{ v.PlateNumber }}</h5>
+
+          <ion-chip color="primary" style="padding: 0 5px 0 5px">
+            <duration (timeEvent)="getTime($event , v)"></duration>
+            {{ v.timeDuration | time}}
+          </ion-chip>
+
+          <button item-end  class="{{v.RecordStatusID | transColor}}" (click)="pressStatus(v)"><b>{{v.RecordStatusID | transText}}</b></button>
+          <button  ion-button clear item-end (click)="viewDetails(v)">View
+          </button>
+        </ion-item>
+      </div>
+    </ion-list>
+</ion-content>

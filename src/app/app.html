@@ -1,0 +1,38 @@
+<ion-menu [content]="mycontent" persistent="true">
+    <ion-content>
+        <ion-list>
+            <br>
+          <button ion-item item-start icon-right menuClose (click)="goToProfile()">Profile
+            <ion-icon item-end  name="arrow-forward"></ion-icon>
+          </button>
+            <button ion-item item-start icon-right menuClose (click)="goToCustomers()">Customers
+                <ion-icon item-end  name="arrow-forward"></ion-icon>
+            </button>
+            <button ion-item item-start icon-right>Check Status
+                <ion-icon item-end  name="arrow-forward"></ion-icon>
+            </button>
+            <button ion-item item-start icon-right>Hand Over
+                <ion-icon item-end  name="arrow-forward"></ion-icon>
+            </button>
+            <button ion-item item-start icon-right>Reports
+                <ion-icon item-end  name="arrow-forward"></ion-icon>
+            </button>
+            <button ion-item item-start icon-right>Loyalty Points
+                <ion-icon item-end  name="arrow-forward"></ion-icon>
+            </button>
+          <button ion-item item-start icon-right (click)="damages()">
+            Damages
+            <ion-icon item-end name="arrow-forward"></ion-icon>
+          </button>
+          <button ion-item item-start icon-right (click)="notification()">
+            Notifications
+            <ion-icon item-end name="arrow-forward"></ion-icon>
+          </button>
+            <button ion-item item-start icon-right menuClose (click)="logout()">
+              Logout
+              <ion-icon item-end ios="ios-exit" md="md-exit"></ion-icon>
+            </button>
+        </ion-list>
+    </ion-content>
+</ion-menu>
+<ion-nav #mycontent  [root]="rootPage"></ion-nav>

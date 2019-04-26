@@ -1,0 +1,47 @@
+<ion-header>
+  <ion-navbar  color="primary">
+    <ion-title>Selecting Brand</ion-title> 
+    <ion-buttons end>
+      <button ion-button icon-only (click)="addCustomer
+      ()">
+        <ion-icon name="person"></ion-icon>
+      </button>
+      <button ion-button padding clear (click)="goHome()">
+        Home
+      </button>
+    </ion-buttons>
+  </ion-navbar>
+</ion-header>
+
+
+<ion-content>
+  <ion-searchbar (ionInput)="getItem($event)"></ion-searchbar>
+
+  <ion-row>
+    <ion-col col-6 class="list">
+        <ion-list>
+          <ion-item *ngFor="let right of rightBrands" (click)="goColor(right.brandId)"
+          [class.selected]="selected !== null && right.brandId === selected">
+            <ion-avatar item-start>
+              <img src="assets/car-brands/{{right.image}}" alt="iconName">
+            </ion-avatar>
+            {{ right.name}}
+          </ion-item>
+        </ion-list>
+    </ion-col>
+    <ion-col col-6 class="list">
+      <ion-list>
+        <ion-item *ngFor="let left of leftBrands" (click)="goColor(left.brandId)"
+                  [class.selected]="selected !== null && left.brandId === selected">
+                <ion-avatar item-start>
+                  <img src="assets/car-brands/{{left.image}}" alt="iconName">
+                </ion-avatar>
+          {{ left.name}}
+        </ion-item>
+      </ion-list>
+    </ion-col>
+  </ion-row>
+
+</ion-content>
+
+<transaction *ngIf="Ticket" [carData]="Ticket"></transaction>

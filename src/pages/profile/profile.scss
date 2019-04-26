@@ -1,0 +1,64 @@
+page-profile {
+ 
+  .scroll-content{
+    padding: 0 !important;
+  }
+  ion-card ,.card-md{
+    margin: 0 !important;
+    background-image: url('../assets/parking.jpg') !important;
+    background-size: cover;
+    background-repeat: no-repeat;
+    width: 100%;
+  }
+
+  .right-menu-button
+  {
+    margin-left:20px;
+  }
+  .avatar {
+    width: 200px;
+    height: 200px;
+    padding: 4px;
+    margin: auto;
+    border: solid 1px #DDDDDD;
+    border-radius: 50%;
+  }
+  ion-card {
+    text-align: center;
+  }
+  .info
+  {
+    margin-top: 8px;
+    text-align: left;
+    display: inline-block;
+    h3 {
+      font-size: 20px;
+      font-weight: bolder;
+      text-transform: uppercase;
+    }
+  }
+  .user-points {
+    display:inline-block;
+    border:solid 1px;
+    width:250px;
+  }
+  ul {
+    padding:0;
+    display:inline;
+    &.rating li {
+      padding: 0 !important;
+      background: none;
+      color: #ffb400;
+
+      ion-icon {
+        font-size: 30px;
+      }
+    }
+  }
+
+  .error{
+    padding: 7px;
+    background-color: #fb2a32;
+    color: white;
+  }
+}

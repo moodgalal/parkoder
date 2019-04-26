@@ -1,0 +1,22 @@
+<ion-footer style="background-color: #f5f5f5; height: 60px;" #element>
+  <ion-list>
+      <ion-item style="background-color: #f5f5f5; border-top: 1px solid #d9d8ee;">
+        <ion-avatar item-start>
+          <img src="{{ carData.CountryCode | countryImage }}" alt="iconName">
+        </ion-avatar>
+        <div style="float: left;">
+          <h3>{{ carData.BarCode }}</h3>
+          <h5>{{ carData.VehicleBrandName }}</h5>
+          <h5>PlateNo:{{ carData.PlateNumber }}</h5>
+        </div>
+        <ion-avatar  item-end *ngIf="carData.VehicleBrandID">
+          <img src="{{ carData.VehicleBrandID | brandImage }}" alt="Car Brand">
+        </ion-avatar>
+        <ion-chip color="primary" style="padding: 0 5px 0 5px; float: right;">
+          <duration (timeEvent)="getTime($event , carData)"></duration>
+          {{ carData.timeDuration | time }}
+        </ion-chip>
+        <div style="clear: both;"></div>
+      </ion-item>
+  </ion-list>
+</ion-footer>

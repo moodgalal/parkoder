@@ -1,0 +1,29 @@
+﻿<ion-header>
+  <ion-navbar hidebackbutton="true" color="primary">
+    <ion-title>Status</ion-title>
+    <ion-buttons end>
+      <button ion-button icon-only (click)="addCustomer()">
+        <ion-icon name="person"></ion-icon>
+      </button>
+      <button ion-button icon-only (click)="drawDamages()">
+        <ion-icon name="car"></ion-icon>
+      </button>
+      <button ion-button padding clear  (click)="goHome()">
+        Home
+      </button>
+    </ion-buttons>
+  </ion-navbar>
+</ion-header>
+
+
+<ion-content>
+  <div *ngIf="status " >
+    <ion-list>
+      <button ion-item *ngFor="let state of status" (click)="saveCar(state.VehicleStatusID)"
+              [class.selected]="selected !== null && state.VehicleStatusID == selected">
+        {{ state.VehicleStatusName}}</button>
+    </ion-list>
+  </div>
+</ion-content>
+
+<transaction *ngIf="Ticket" [carData]="Ticket"></transaction>

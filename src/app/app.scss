@@ -1,0 +1,39 @@
+// http://ionicframework.com/docs/v2/theming/
+.toolbar-md-primary .toolbar-background-md ,.button-md {
+    background: #E91E63;
+}
+.bar-button-default-md:hover:not(.disable-hover), .bar-button-clear-md-default:hover:not(.disable-hover), .bar-button-md-default:hover:not(.disable-hover){
+    color: #fff;
+}
+.button-clear-md{
+    color: #fff;
+}
+ion-title{
+    text-align: center;
+  }
+  .searchbar-md .searchbar-input{
+      border-radius: 20px;
+      background-color: #fff;
+  }
+  .searchbar-md .searchbar-input:focus{
+      background-color: rgba(233, 30, 98, 0.233);
+  }
+  .searchbar-md .searchbar-clear-icon{
+      border-radius: 50%;
+      width: 42px;
+      color: #fff;
+      right: 0;
+  }
+// App Global Sass
+// --------------------------------------------------
+// Put style rules here that you want to apply globally. These
+// styles are for the entire app and not just one component.
+// Additionally, this file can be also used as an entry point
+// to import other Sass files to be included in the output CSS.
+//
+// Shared Sass variables, which can be used to adjust Ionic's
+// default Sass variables, belong in "theme/variables.scss".
+//
+// To declare rules for a specific mode, create a child rule
+// for the .md, .ios, or .wp mode classes. The mode class is
+// automatically applied to the <body> element in the app.

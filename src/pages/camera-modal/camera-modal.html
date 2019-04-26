@@ -1,0 +1,21 @@
+<ion-header>
+  <ion-navbar color="primary">
+    <ion-buttons end>
+      <button ion-button (click)="takePic()">
+        Take Another Photo
+      </button>
+      <button ion-button  (click)="dismiss()">
+        Done
+      </button>
+    </ion-buttons>
+  </ion-navbar>
+</ion-header>
+
+
+<ion-content padding text-center>
+  <ion-slides slidesPerView="3" spaceBetween="5" *ngIf="imagesList.length > 0">
+    <ion-slide *ngFor="let pic of imagesList" >
+      <img src="{{pic}}"  imageViewer>
+    </ion-slide>
+  </ion-slides>
+</ion-content>

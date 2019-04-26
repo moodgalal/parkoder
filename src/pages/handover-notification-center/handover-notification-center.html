@@ -1,0 +1,21 @@
+<ion-header>
+  <ion-navbar color="primary">
+    <ion-title>
+      Notifications
+    </ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+  <ion-list *ngIf="users">
+    <ion-item  *ngFor="let user of users" (click)="sendPush(user.FireBaseUID, sender.token , sender.name , 'Would you take it ?' , 'sender')">
+      <ion-thumbnail *ngIf="user.PhotoExtention" item-start >
+        <img [src]="user.photo">
+      </ion-thumbnail>
+      <ion-thumbnail *ngIf="user.PhotoExtention == null" item-start>
+        <img src="assets/no-img.gif">
+      </ion-thumbnail>
+      <span>{{user.ParkUserName}}</span>
+    </ion-item>
+  </ion-list>
+</ion-content>

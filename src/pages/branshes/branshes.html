@@ -1,0 +1,20 @@
+<ion-header>
+  <ion-navbar color="primary">
+    <ion-title>Sites</ion-title>
+      <ion-buttons end>
+          <button [disabled]="disableButtons" ion-button icon-only small padding (click)="logout()"> <ion-icon ios="ios-exit" md="md-exit"></ion-icon></button>
+      </ion-buttons>
+  </ion-navbar>
+</ion-header>
+<ion-content>
+ <ion-searchbar (ionInput)="getItem($event)"></ion-searchbar>
+<div *ngIf=" branches ">
+    <ion-list>
+      <button [disabled]="disableButtons" ion-item *ngFor="let bransh of  branches "
+              (click)="selectBransh(bransh , bransh.VehicleBrand , bransh.VehicleColor  ,bransh.VehicleStatus, bransh.VehicleType ,bransh.CurrencyCode )">
+        {{ bransh.SiteName}}
+      </button >
+    </ion-list>
+
+</div>
+</ion-content>

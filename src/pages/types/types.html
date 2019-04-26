@@ -1,0 +1,27 @@
+<ion-header>
+  <ion-navbar hidebackbutton="true" color="primary">
+    <ion-title>Selecting Type</ion-title>
+    <ion-buttons end>
+      <button ion-button icon-only (click)="addCustomer()">
+        <ion-icon name="person"></ion-icon>
+      </button>
+      <button ion-button padding clear  (click)="goHome()">
+        Home
+      </button>
+    </ion-buttons>
+  </ion-navbar>
+</ion-header>
+
+
+<ion-content>
+  <div *ngIf="types ">
+    <ion-list>
+      <button ion-item *ngFor="let type of types" (click)="goStatus(type.VehicleTypeID)"
+              [class.selected]="selected !== null && type.VehicleTypeID == selected">
+        {{ type.VehicleTypeName}}</button>
+    </ion-list>
+  </div>
+</ion-content>
+
+<transaction *ngIf="Ticket" [carData]="Ticket"></transaction>
+

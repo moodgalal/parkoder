@@ -1,0 +1,52 @@
+<ion-header>
+  <ion-navbar color="primary" align-title="center">
+    <ion-title>Profile</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+  <ion-card>
+    <ion-card-content>
+      <img *ngIf="extension == null"  src="assets/no-img.gif" class="avatar" />
+      <img *ngIf="extension" [src]="safePhotoUrl" class="avatar" />
+
+      <div class="info">
+        <h3>
+          {{ username }}
+        </h3>
+      </div>
+    </ion-card-content>
+  </ion-card>
+  <!-- <ion-list>
+    <ion-item no-lines no-border>
+      <button item-end ion-button small color="primary" padding (click)="showChangePass()">Change Password</button>
+    </ion-item>
+  </ion-list> -->
+  <ion-list>
+    <ion-item>
+      <ion-icon name="person" item-start></ion-icon>
+      UserName : {{ username }}
+    </ion-item>
+    <ion-item>
+      <ion-icon name="barcode" item-start></ion-icon>
+      Site Id : {{ siteId }}
+    </ion-item>
+    <ion-item>
+      <ion-icon name="locate" item-start></ion-icon>
+      Site Name : {{ siteName }}
+    </ion-item>
+    <ion-item (click)="showChangePass()">
+      <ion-icon name="lock" item-start></ion-icon>
+      Change password
+    </ion-item>
+  </ion-list>
+  <form #f="ngForm" [hidden]="!showChangePassword" padding>
+
+    <ion-input type="text" [(ngModel)]="currentPass" name="current" required placeholder="Current Password"></ion-input>
+    <ion-input type="text" #pass [(ngModel)]="newPass" name="new" required placeholder="New Password"></ion-input>
+    <ion-input type="text" #confirm [(ngModel)]="confirmPass" name="confirm" required placeholder="Confirm Password"></ion-input>
+    <div class="error" *ngIf="pass.value !== confirm.value">Match the passwords please</div>
+
+    <button [disabled]="!f.valid || disableButtons" ion-button block color="primary" (click)="changePass()">Save</button>
+  </form>
+</ion-content>

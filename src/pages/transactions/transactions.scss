@@ -1,0 +1,48 @@
+page-transactions, page-processed-viehcles {
+
+      ion-item .green
+      {
+        color : #00b300;
+      }
+  ion-item .yellow
+  {
+    color : #cdbd2a;
+  }
+  ion-item .red
+  {
+    color : #f81e30;
+  }
+  ion-item .blue
+  {
+    color: #335ced;
+  }
+  ion-item .purple
+  {
+    color: #be31ec;
+  }
+  ion-item .red,ion-item .yellow,ion-item .green,ion-item .blue,  ion-item .purple
+  {
+     background: none;
+  }
+
+  ion-navbar ion-badge .one
+  {
+    z-index: 1;
+    position: absolute;
+    top:-5px;
+    left: 27%;
+  }
+  ion-navbar ion-badge .two
+  {
+    z-index: 1;
+    position: absolute;
+    top:-5px;
+    left: 17%;
+  }
+  .navIcon
+  {
+    z-index: 0;
+    margin-left: 15px;
+  }
+  $refresher-icon-color : #488aff !important;
+}

@@ -1,0 +1,26 @@
+<ion-header>
+  <ion-navbar hideBackButton color="primary">
+    <ion-title>Selecting a Pin</ion-title>
+    <ion-buttons end>
+      <button ion-button icon-only (click)="doFilter()">
+        <ion-icon name="funnel"></ion-icon>
+      </button>
+      <button [disabled]="disableButtons" ion-button padding=""  clear (click)="goHome()">
+        Home
+      </button>
+    </ion-buttons>
+  </ion-navbar>
+</ion-header>
+
+
+<ion-content>
+  <div *ngIf="binsLocations">
+    <ion-list>
+      <button [disabled]="disableButtons" ion-item *ngFor="let bin of binsLocations" (click)="processBin(bin)"
+              [class.selected]="selected !== null && bin.BinID === selected">
+        {{ bin.BinName}}</button>
+    </ion-list>
+  </div>
+</ion-content>
+
+<transaction *ngIf="Ticket" [carData]="Ticket"></transaction>

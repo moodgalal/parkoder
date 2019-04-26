@@ -1,0 +1,86 @@
+<ion-header>
+  <ion-navbar color="primary">
+    <ion-title text-center>Retrieve Details</ion-title>
+
+    <ion-buttons end>
+      <button ion-button icon-only (click)="takePic()">
+        <ion-icon name="camera"></ion-icon>
+      </button>
+        <button ion-button icon-only (click)="drawDamages()">
+            <ion-icon name="car"></ion-icon>
+          </button>
+      <button ion-button icon-only (click)="addCustomer()">
+        <ion-icon name="person"></ion-icon>
+      </button>
+    </ion-buttons>
+
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+  <ion-list *ngIf="allInfo">
+    <ion-item>
+        <ion-icon name="barcode" item-start></ion-icon>
+     Barcode:  {{allInfo.BarCode}}
+    </ion-item>
+    <ion-item>
+        <ion-icon name="radio-button-on" item-start></ion-icon>
+        Plate Number:  {{allInfo.PlateNumber}}
+    </ion-item>
+    <ion-item [hidden]="allInfo.PlateNoPrefix === null">
+        <ion-icon name="radio-button-on" item-start></ion-icon>
+        Plate Number Prefix:  {{allInfo.PlateNoPrefix}}
+    </ion-item>
+    <ion-item>
+        <ion-icon name="clock" item-start></ion-icon>
+        Time In:  {{myCar.getHours()}}:{{myCar.getMinutes()}}
+    </ion-item>
+    <ion-item *ngIf="allInfo.InRequestDate != null">
+        <ion-icon name="clock" item-start></ion-icon>
+        In request Time:  {{myCar.getHours()}}:{{myCar.getMinutes()}}
+    </ion-item>
+    <ion-item>
+        <ion-icon name="person" item-start></ion-icon>
+        Entry User:  {{allInfo.EntryUserName}}
+
+    </ion-item>
+    <ion-item>
+        <ion-icon name="person" item-start></ion-icon>
+        processor:  {{allInfo.BinUserName}}
+
+    </ion-item>
+    <ion-item [hidden]="allInfo.RetrieveSalePersonID == null || allInfo.RetrieveSalePersonID.trim() != userEmail.trim()">
+        <ion-icon name="person" item-start></ion-icon>
+        RetrieveSalePersonID:  {{allInfo.RetrieveSalePersonID}}
+
+    </ion-item>
+    <div *ngIf="allInfo.RetrieveSalePersonID != null && userEmail != null">
+    <ion-grid [hidden]="allInfo.RetrieveSalePersonID.trim() != userEmail.trim()" >
+      <ion-row>
+        <ion-col  width-50>
+          <ion-item>
+            <button [disabled]="allInfo.CollectedAMT >= allInfo.DocAmount"  ion-button full padding color="primary">
+              <ion-icon [hidden]="allInfo.CollectedAMT >= allInfo.DocAmount"  name="cash"></ion-icon>
+              Payment
+            </button>
+          </ion-item>
+          <ion-item>
+            <button  ion-button full padding color="primary" (click)="handover()">Handover</button>
+          </ion-item>
+        </ion-col>
+        <ion-col  width-50>
+          <ion-item>
+            <button [disabled]="allInfo.CollectedAMT >= allInfo.DocAmount" ion-button full padding color="danger" (click)="saveRelease()">Release</button>
+          </ion-item>
+          <ion-item>
+            <button ion-button full padding color="danger" (click)="resumeTrans()">Resume</button>
+          </ion-item>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+    </div>
+  </ion-list>
+</ion-content>
+<transaction *ngIf="allInfo" [carData]="allInfo"></transaction>

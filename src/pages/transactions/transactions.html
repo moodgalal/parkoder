@@ -1,0 +1,81 @@
+    <ion-header>
+        <ion-navbar color="primary">
+            <button ion-button  icon-only menuToggle (click)="openMenu()">
+                <ion-icon name='menu'></ion-icon>
+            </button>
+          <ion-buttons>
+              <button ion-button icon-only (click)="showProcessed()" class="navIcon">
+                  <ion-icon name="construct">
+                  </ion-icon>
+                  <ion-badge small  [hidden]="processedTrans.length == 0" color="second-primary" class="one">{{ processedTrans.length }}</ion-badge>
+              </button>
+              <button ion-button icon-only (click)="openCompleted()" class="navIcon">
+                  <ion-icon name="cash">
+                  </ion-icon>
+                  <ion-badge small [hidden]="completedTrans.length == 0" color="second-primary" class="two">{{ completedTrans.length }}</ion-badge>
+              </button>
+          </ion-buttons>
+
+            <ion-buttons end>
+                   <button ion-button  (click)="ShowBarking()" style="margin-right: 8px">
+                       {{ filterText ? filterText : 'Parking' }}
+                   </button>
+                <button ion-button   (click)="ShowGates()" style="margin-right: 8px">
+                    {{ gateText ? gateText : 'Gate' }}
+                </button>
+            </ion-buttons>
+        </ion-navbar>
+    </ion-header>
+
+<ion-content>
+    <ion-refresher (ionRefresh)="doRefresh($event)" color="primary">
+        <ion-refresher-content></ion-refresher-content>
+    </ion-refresher>
+    <ion-grid>
+   <form #f="ngForm" (submit)="getBarcode()">
+       <ion-row>
+             <ion-col>
+                 <ion-input  type="text" [(ngModel)]="barcodeVal" #barcodeValid name="barcode" minlength="5" placeholder="Enter Barcode"></ion-input>
+             </ion-col>
+           <ion-col>
+               <button [disabled]="barcodeValid.value.length < 5 || barcodeValid.value == null || disableButtons " ion-button style="float:right" small inlist type="submit">Search</button>
+           </ion-col>
+       </ion-row>
+    </form>
+        <hr>
+           <ion-list >
+                <div *ngIf="trans">
+                    <ion-item *ngFor="let v of trans" [hidden]="v.RecordStatusID == 2 || v.RecordStatusID == 5">
+                        <ion-avatar item-start>
+                            <img src="{{ v.CountryCode | countryImage }}" alt="iconName">
+                        </ion-avatar>
+
+                      <div item-start>
+                        <h3 class="{{v.RecordStatusID | transColor}}">{{ v.BarCode }}</h3>
+                        <h5>{{ v.VehicleBrandName }}</h5>
+                        <h5>PlateNo:{{ v.PlateNumber }}</h5>
+
+                        <ion-chip color="primary" style="padding: 0 5px 0 5px">
+                          <duration (timeEvent)="getTime($event , v)"></duration>
+                          {{ v.timeDuration | time}}
+                        </ion-chip>
+                      </div>
+
+                        <button [disabled]="disableButtons"  class="{{v.RecordStatusID | transColor}}" (click)="pressStatus(v)" item-start text-left>
+                          <b style="display: block; margin-bottom: 2px;" *ngIf="v.RecordStatusID == 1">{{v.InPorcessUser}}</b>
+                          <b style="display: block; margin-bottom: 2px;" *ngIf="v.RecordStatusID == 4">{{v.RetrieveSalePersonID}}</b>
+                          <b style="display: block; margin-bottom: 2px;" *ngIf="v.RecordStatusID == 6">{{v.InPorcessUser}}</b>
+                          <b style="display: block; margin-bottom: 2px;">{{v.RecordStatusID | transText}}</b>
+                          <b style="display: block; margin-bottom: 2px;"> {{v.GateName}}</b>
+                          <b>{{v.SubSiteName}}</b>
+                        </button>
+
+                        <button [disabled]="disableButtons" ion-button clear item-end
+                                (click)="viewDetails(v)">View</button>
+                    </ion-item>
+                </div>
+           </ion-list>
+    </ion-grid>
+</ion-content>
+
+        <transaction *ngIf="activeUserInProcessCar" [carData]="activeUserInProcessCar" (click)="pressStatus(activeUserInProcessCar)"></transaction>

@@ -1,0 +1,79 @@
+<ion-header>
+  <ion-navbar color="primary">
+    <ion-title>Retrieve</ion-title>
+    <ion-buttons end>
+      <button ion-button icon-only (click)="addCustomer()">
+        <ion-icon name="person"></ion-icon>
+      </button>
+    </ion-buttons>
+  </ion-navbar>
+</ion-header>
+<ion-content padding *ngIf="allInfo">
+  <ion-list>
+    <ion-item>
+      <ion-icon name="barcode" item-start></ion-icon>
+      Barcode Number : {{ allInfo.BarCode }}
+
+    </ion-item>
+    <ion-item>
+      <ion-icon name="radio-button-on" item-start></ion-icon>
+      Plate Number: {{allInfo.PlateNumber}}
+
+    </ion-item>
+    <ion-item>
+      <ion-icon name="clock" item-start></ion-icon>
+      Date In: {{ myCar.transDate | preDate}}, {{myCar.transDate.getHours()}}:{{myCar.transDate.getMinutes()}}
+
+    </ion-item>
+    <ion-item>
+      <ion-icon name="clock" item-start></ion-icon>
+      Date In: {{ timeInMs | date:'H:m'}}
+    </ion-item>
+    <ion-item>
+      <ion-icon name="clock" item-start></ion-icon>
+      Duration: {{ myCar.duration| time }}
+
+    </ion-item>
+    <ion-item *ngIf="allInfo.IsPaid===0">
+      <ion-icon name="pricetag" item-start></ion-icon>
+      Price: {{ myCar.duration| time }}
+      <span item-end padding style="background-color: #ddd; border-radius: 5px">
+        <strong>{{ price }} BHD</strong>
+      </span>
+    </ion-item>
+    <ion-grid>
+      <ion-row>
+        <ion-col width-50>
+          <ion-item>
+            <button [disabled]="allInfo.IsPaid!==1" ion-button full padding color="primary" (click)="release()">
+              Release
+            </button>
+          </ion-item>
+          <ion-item>
+            <button ion-button full padding color="primary" (click)="handover()">Handover</button>
+          </ion-item>
+        </ion-col>
+        <ion-col width-50>
+          <ion-item>
+            <button ion-button full padding color="primary" (click)="hold()">OK</button>
+          </ion-item>
+          <ion-item>
+            <button ion-button full padding color="primary" (click)="hold()">Cancel</button>
+          </ion-item>
+          <ion-item>
+            <button [disabled]="allInfo.IsPaid!==0" ion-button full icon-left padding color="primary" (click)="payment()">
+              <ion-icon name="cash"></ion-icon>
+              Payment
+            </button>
+          </ion-item>
+          <ion-item>
+            <button ion-button full padding color="primary" (click)="Resume()">Resume</button>
+          </ion-item>
+          <ion-item>
+            <button ion-button full padding color="primary" (click)="GoQueueOut()">Queue Out</button>
+          </ion-item>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </ion-list>
+</ion-content>
